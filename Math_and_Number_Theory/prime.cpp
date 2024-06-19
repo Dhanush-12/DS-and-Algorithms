@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Time complexity : O(sqrt(n));
 bool isprime(int n)
 {
     if(n<2) return false;

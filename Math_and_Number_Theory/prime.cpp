@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Time Complexity : O(n * log(log(n)));
 void seive_of_erathosthenes(int n)
 {
     bool prime[n+1];
@@ -15,13 +16,13 @@ void seive_of_erathosthenes(int n)
             }
         }
     }
-    for(int i=2;i<=n;i++)
-    {
-        if(prime[i])
-        {
-            cout<<i<<" ";
-        }
-    }
+    // for(int i=2;i<=n;i++)
+    // {
+    //     if(prime[i])
+    //     {
+    //         cout<<i<<" ";
+    //     }
+    // }
 }
 // Time complexity : O(sqrt(n));
 bool isprime(int n)

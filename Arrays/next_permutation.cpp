@@ -2,6 +2,7 @@
 #define ll long long
 using namespace std;
 #include <bits/stdc++.h>
+//Time complexity : O(n);
 void next_permut(vector<int>&arr,int n)
 {
     int ind=-1;

@@ -16,6 +16,7 @@ int dp(int n,vector<int>&arr)
     }
     return *max_element(dp.begin(),dp.end());
 }
+// Time complexity : O(n * log(n));
 int optimal(int n,vector<int>&arr)
 {
     vector<int> ans;

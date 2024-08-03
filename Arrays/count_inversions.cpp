@@ -14,6 +14,7 @@ int brute(int n,vector<int>&arr)
     }
     return ans;
 }
+// Time complexity added : O(n * log(n))
 void merger(int l, int m, int r,vector<int>&arr)
 {
         int l1=m-l+1;

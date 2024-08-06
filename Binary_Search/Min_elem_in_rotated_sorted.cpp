@@ -42,5 +42,5 @@ int main()
    for(int i=0;i<n;i++) cin>>arr[i];
    pair<int,int>ans=solve(n,arr);
    cout<<"Minimum element in the rotated sorted array is : "<<ans.first<<endl;
-   cout<<"The number of times the array is rotated is : "<<n-ans.second<<endl;
+   cout<<"The number of times the array is rotated is : "<<(n-ans.second)%n<<endl;
 }

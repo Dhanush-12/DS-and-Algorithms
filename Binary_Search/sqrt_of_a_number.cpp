@@ -19,9 +19,7 @@ int floor_of_sqrt(int n)
 }
 int main()
 {
-    while(1){
     int n;
     cin>>n;
     cout<<floor_of_sqrt(n)<<endl;
-    }
 }

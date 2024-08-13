@@ -16,7 +16,6 @@ int optimal(int n,int m,vector<vector<int>>&arr,int k)
        int midn=(lown+highn)>>1;
        if(arr[midn][0]<=k && arr[midn][m-1]>=k)
        {
-           //cout<<midn<<endl;
            int lowm=0,highm=m-1;
            while(lowm<=highm)
            {
@@ -44,7 +43,7 @@ int optimal(int n,int m,vector<vector<int>>&arr,int k)
    }
    return 0;
 }
-// Time complexity : O(n * log(m));
+// Time complexity : O(n * m);
 bool searchinmatrix(int n,int m,vector<vector<int>>&arr,int k)
 {
    for(int i=0;i<n;i++)

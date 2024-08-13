@@ -7,7 +7,7 @@
 #define mod (int)(1e9 + 7)
 #define nl endl
 using namespace std;
-// Time Complexity : O(n*m)
+// Time Complexity : O(n+m)
 pair<int,pair<int,int>> optimal2(int n,int m,vector<vector<int>>&arr,int k)
 {
     int row = 0, col = m - 1;
@@ -20,7 +20,7 @@ pair<int,pair<int,int>> optimal2(int n,int m,vector<vector<int>>&arr,int k)
     }
     return {0,{-1,-1}};
 }
-// Time complexity : O(n * log(m));
+// Time complexity : O(n * m);
 bool searchinmatrix2(int n,int m,vector<vector<int>>&arr,int k)
 {
    for(int i=0;i<n;i++)

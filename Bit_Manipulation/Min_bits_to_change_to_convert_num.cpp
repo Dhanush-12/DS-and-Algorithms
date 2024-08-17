@@ -3,7 +3,7 @@ using namespace std;
 int min_bits_to_goal(int n,int m)
 {
     int ans=n^m;
-    //return __builtin_popcount(ans);// Time complexity : O(log(max(n,m)));
+    //return __builtin_popcount(ans);// Time complexity : O(log(n^m));
     int cnt=0;
     while(ans)
     {

@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-// Time complexity : O(log2(n));
+// Time complexity : O(1);
 void swapusingbits(int &a,int &b)
 {
     a=a^b;

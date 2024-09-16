@@ -7,6 +7,7 @@ int priority(char ch)
     if(ch=='+' || ch=='-') return 1;
     return -1;
 }
+// Time complexity : O(n);
 string infix_to_prefix(string str)
 {
     int n=(int)str.size();

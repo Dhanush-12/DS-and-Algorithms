@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Time complexity : O(2N);
 vector<int>next_greater(int n,vector<int>&arr)
 {
     vector<int>ans;

@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 const int mod=1000000007;
+// Time complexity : O(n^2);
 int sum_of_subarray_mins(int n,vector<int>&arr)
 {
     int ans=0;
@@ -64,6 +65,7 @@ void suffsmallest(int n,vector<int>&arr,vector<int>&ans)
     }
     reverse(ans.begin(),ans.end());
 }
+// Time complexity : O(5*n);
 int optimal_sum_of_subarray_mins(int n,vector<int>&arr)
 {
     int ans=0;

@@ -4,6 +4,8 @@ struct Node
 {
     Node* links[26];
     bool flag=false;
+    int cntEndWith=0;
+    int cntPrefix=0;
     bool containsKey(char ch)
     {
         return (links[ch-'a'] != NULL);
@@ -16,13 +18,37 @@ struct Node
     {
         return links[ch-'a'];
     }
-    bool setEnd()
+    void setEnd()
     {
         flag=true;
     }
     bool isEnd()
     {
         return flag;
+    }
+    void increaseEnd()
+    {
+        cntEndWith++;
+    }
+    void increasePrefix()
+    {
+        cntPrefix++;
+    }
+    void deleteEnd()
+    {
+        cntEndWith--;
+    }
+    void reducePrefix()
+    {
+        cntPrefix--;
+    }
+    int getEnd()
+    {
+        return cntEndWith;
+    }
+    int getPrefix()
+    {
+        return cntPrefix;
     }
 };
 class Trie
@@ -43,8 +69,11 @@ public:
                 node->put(word[i],new Node());
             }
             node=node->get(word[i]);
+            node->increaseEnd();
+            node->increasePrefix();
         }
         node->setEnd();
+        node->increaseEnd();
     }
     bool search(string word)
     {
@@ -72,14 +101,66 @@ public:
         }
         return true;
     }
+    int countWordsEqualTo(string &word)
+    {
+        Node* node=root;
+        for(int i=0;i<word.size();i++)
+        {
+            if(node->containsKey(word[i]))
+            {
+                node=node->get(word[i]);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        node->getEnd();
+    }
+    int countWordsStartingWith(string &word)
+    {
+        Node* node=root;
+        for(int i=0;i<word.size();i++)
+        {
+            if(node->containsKey(word[i]))
+            {
+                node=node->get(word[i]);
+            }
+            else return 0;
+        }
+        return node->getPrefix();
+    }
+    void erase(string &word)
+    {
+        Node* node=root;
+        for(int i=0;i<word.size();i++)
+        {
+            if(node->containsKey(word[i]))
+            {
+                node=node->get(word[i]);
+                node->reducePrefix();
+            }
+            else return;
+        }
+        node->deleteEnd();
+    }
 };
 int main()
 {
     Trie t;
     t.insert("hello");
     t.insert("help");
+    t.insert("helper");
+    t.insert("hesitate");
+    t.insert("hell");
     cout<<t.search("help")<<endl;
     cout<<t.startsWith("hel")<<endl;
     cout<<t.startsWith("he")<<endl;
     cout<<t.search("hel")<<endl;
+    string word="hell";
+    cout<<t.countWordsStartingWith(word)<<endl;
+    word="hell";
+    t.erase(word);
+    word="hell";
+    cout<<t.countWordsStartingWith(word)<<endl;
 }

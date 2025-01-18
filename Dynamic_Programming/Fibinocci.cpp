@@ -1,10 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Time complexity of recursion is O(2^n) and space complexity is O(n)
 int recursion(int n)
 {
     if(n<=1) return n;
     return recursion(n-1)+recursion(n-2);
 }
+// Time complexity of memorization is O(n) and space complexity is O(n)
 int memorization(int n,vector<int>&dp)
 {
     if(n<=1) return n;
@@ -25,5 +27,6 @@ int main()
     {
         dp[i]=dp[i-1]+dp[i-2];
     }
+    // Time complexity of tabulation is O(n) and space complexity is O(n)
     cout<<"Answer using tabulation: "<<dp[n]<<endl;
 }

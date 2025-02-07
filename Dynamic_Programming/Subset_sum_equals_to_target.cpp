@@ -69,7 +69,7 @@ int main()
     vector<int>arr(n);
     for(int i=0;i<n;i++) cin>>arr[i];
     cout<<"Answer using the Recursion: "<<recursion(n-1,target,arr)<<endl;
-    vector<vector<int>>dp(n+1,vector<int>(target+1,-1));
+    vector<vector<int>>dp(n,vector<int>(target+1,-1));
     cout<<"Answer using Memorization: "<<memorization(n-1,target,arr,dp)<<endl;
     vector<vector<int>>dp1(n,vector<int>(target+1,0));
     cout<<"Answer using Tabulation: "<<tabulation(n,target,arr,dp1)<<endl;

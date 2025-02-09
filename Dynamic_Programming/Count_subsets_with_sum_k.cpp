@@ -2,6 +2,7 @@
 #define inf 1000000007
 using namespace std;
 // We are given an array and a target, we have to find the number of subsets we can form whose individual sums equal to target.
+// Note: 1<=arr[i]<=10^5
 // Time Complexity: O(2^n) and Space Complexity: O(n);
 int recursion(int ind,int t,vector<int>&arr)
 {

@@ -20,10 +20,10 @@ int recursion(int ind,int t,vector<int>&arr)
 // Time Complexity: O(n*target) and Space Complexity: O(n*target)+O(n);
 int memorization(int ind,int t,vector<int>&arr,vector<vector<int>>&dp)
 {
-    if(t==0) return 1;
+    if(t==0 && arr[0]==0) return 2;
     if(ind==0)
     {
-        if(arr[ind]==t) return 1;
+        if(arr[ind]==t || t==0) return 1;
         else return 0;
     }
     int not_take=memorization(ind-1,t,arr,dp);
@@ -34,11 +34,12 @@ int memorization(int ind,int t,vector<int>&arr,vector<vector<int>>&dp)
 // Time Complexity: O(n*target) and Space Complexity: O(n*target);
 int tabulation(int n,int t,vector<int>&arr,vector<vector<int>>&dp)
 {
-    for(int i=0;i<n;i++) dp[i][0]=1;
-    if(t>=arr[0]) dp[0][arr[0]]=1;
+    if(arr[0]==0) dp[0][0]=2;
+    else dp[0][0]=1; 
+    if(arr[0]!=0&& t>=arr[0]) dp[0][arr[0]]=1;
     for(int i=1;i<n;i++)
     {
-        for(int j=1;j<=t;j++)
+        for(int j=0;j<=t;j++)
         {
             int not_take=dp[i-1][j];
             int take=0;
@@ -52,11 +53,12 @@ int tabulation(int n,int t,vector<int>&arr,vector<vector<int>>&dp)
 int space_optimization(int n,int t,vector<int>&arr)
 {
     vector<int>prev(t+1,0),curr(t+1,0);
-    prev[0]=curr[0]=1;
-    if(t>=arr[0]) prev[arr[0]]=curr[arr[0]]=1;
+    if(arr[0]==0) prev[0]=2;
+    else prev[0]=1;
+    if(arr[0]!=0 && arr[0]<=t) prev[arr[0]]=1;
     for(int i=1;i<n;i++)
     {
-        for(int j=1;j<=t;j++)
+        for(int j=0;j<=t;j++)
         {
             int not_take=prev[j];
             int take=0;

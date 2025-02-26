@@ -46,6 +46,30 @@ int space_optimization(int n,int m,string s,string t)
     }
     return prev[m];
 }
+// Printing the LCS
+string print_LCS(int n,int m,string s,string t,vector<vector<int>>&dp)
+{
+    string ans;
+    int i=n,j=m;
+    while(i>0 && j>0)
+    {
+        if(s[i-1]==t[j-1])
+        {
+            ans+=t[j-1];
+            i--,j--;
+        }
+        else if(dp[i-1][j]>dp[i][j-1])
+        {
+            i--;
+        }
+        else
+        {
+            j--;
+        }
+    }
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
 int main()
 {
     int n,m;
@@ -58,4 +82,5 @@ int main()
     vector<vector<int>>dp1(n+1,vector<int>(m+1,0));
     cout<<"Answer using Tabulation: "<<tabulation(n,m,s,t,dp1)<<endl;
     cout<<"Answer using Space Optimization: "<<space_optimization(n,m,s,t)<<endl;
+    cout<<"Longest Common Subsequence is: "<<print_LCS(n,m,s,t,dp1)<<endl;
 }

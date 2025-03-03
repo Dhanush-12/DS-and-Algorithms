@@ -2,6 +2,7 @@
 #define inf 1000000007
 using namespace std;
 //  Problem Statement: Given two strings s and t, return the length of their longest common subsequence.
+// For the Longest common palindroic subsequence, reverse the string t and find the LCS of s and t.
 // Time Complexity: O(2^n) and Space Complexity: O(n+m);
 int recursion(int ind1,int ind2,string s,string t)
 {

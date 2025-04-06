@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Time Complexity: O(V+E) and Space Complexity: O(V+E);
+// V is the number of vertices and E is the number of edges.
 void dfs(int node, int vis[], stack<int>&s,vector<vector<int>>&adj)
 {
     vis[node]=1;

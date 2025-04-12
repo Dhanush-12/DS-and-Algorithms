@@ -3,7 +3,7 @@
 using namespace std;
 // Find the Shortest Common SuperSequence of both the strings.(SCS is the string that contains both the given strings maintaining the order)
 // Time Complexity: O(n*m) and Space Complexity: O(n*m);
-string shortestSuperSequence(int n,int m,string s,string t)
+string shortestCommonSuperSequence(int n,int m,string s,string t)
 {
     vector<vector<int>>dp(n+1,vector<int>(m+1,0));
     for(int j=0;j<=m;j++) dp[0][j]=0;
@@ -56,5 +56,5 @@ int main()
     cin>>n>>m;
     string s,t;
     cin>>s>>t;
-    cout<<"Answer using Tabulation: "<<shortestSuperSequence(n,m,s,t)<<endl;
+    cout<<"Answer using Tabulation: "<<shortestCommonSuperSequence(n,m,s,t)<<endl;
 }

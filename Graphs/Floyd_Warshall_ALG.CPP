@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 const int inf=1e8;
+// Time Complexity: O(n^3) and Space Complexity: O(n^2);
+// n is the number of vertices in the graph.
 void floydWarshall(int n,vector<vector<int>> &arr) {
     for(int i=0;i<n;i++) arr[i][i]=0;
     for(int vis=0;vis<n;vis++)

@@ -1,60 +1,83 @@
 #include<bits/stdc++.h>
+#define inf 1000000007
 using namespace std;
-int recursion(int i,int j,string s,string t)
+int recursion(int ind1,int ind2,string s,string t)
 {
-    if(i<0) return j+1;
-    if(j<0) return i+1;
-    if(s[i]==t[j]) return recursion(i-1,j-1,s,t);
-    return 1+min({recursion(i-1,j,s,t),recursion(i,j-1,s,t),recursion(i-1,j-1,s,t)});
+    if(ind1<0)
+    {
+        return ind2+1;
+    }
+    if(ind2<0)
+    {
+        return ind1+1;
+    }
+    if(s[ind1]==t[ind2])
+    {
+        return recursion(ind1-1,ind2-1,s,t);
+    }
+    return 1+min(recursion(ind1,ind2-1,s,t),min(recursion(ind1-1,ind2-1,s,t),recursion(ind1-1,ind2,s,t)));
 }
-int memo(int i,int j,string s,string t,vector<vector<int>>&dp)
+int memorization(int ind1,int ind2,string s,string t,vector<vector<int>>&dp)
 {
-    if(i<0) return j+1;
-    if(j<0) return i+1;
-    if(dp[i][j]!=-1) return dp[i][j];
-    if(s[i]==t[j]) return memo(i-1,j-1,s,t,dp);
-    return dp[i][j]=1+min({memo(i-1,j,s,t,dp),memo(i,j-1,s,t,dp),memo(i-1,j-1,s,t,dp)});
+    if(ind1<0) return ind2+1;
+    if(ind2<0) return ind1+1;
+
+    if(dp[ind1][ind2]!=-1) return dp[ind1][ind2];
+
+    if(s[ind1]==t[ind2]) return dp[ind1][ind2]=memorization(ind1-1,ind2-1,s,t,dp);
+
+    return dp[ind1][ind2]=1+min(memorization(ind1,ind2-1,s,t,dp),min(memorization(ind1-1,ind2,s,t,dp),memorization(ind1-1,ind2-1,s,t,dp)));
 }
 int tabulation(int n,int m,string s,string t,vector<vector<int>>&dp)
 {
-    for(int i=0;i<=n;i++)
+    for(int i=0;i<=n;i++) dp[i][0]=i;
+    for(int j=0;j<=m;j++) dp[0][j]=j;
+    for(int i=1;i<=n;i++)
     {
-        for(int j=0;j<=m;j++)
+        for(int j=1;j<=m;j++)
         {
-            if(i==0)
-            {
-                dp[i][j]=j;
-            }
-            else if(j==0)
-            {
-                dp[i][j]=i;
-            }
-            else if(s[i-1]==t[j-1])
+            if(s[i-1]==t[j-1])
             {
                 dp[i][j]=dp[i-1][j-1];
             }
             else
             {
-                dp[i][j]=1+min({dp[i-1][j],dp[i][j-1],dp[i-1][j-1]});
+                dp[i][j]=1+min(dp[i-1][j],min(dp[i-1][j-1],dp[i][j-1]));
             }
         }
     }
     return dp[n][m];
 }
+int space_optimization(int n,int m,string s,string t)
+{
+    vector<int>prev(m+1,0),curr(m+1,0);
+    for(int i=0;i<=m;i++) prev[i]=i,curr[i]=i;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=m;j++)
+        {
+            if(s[i-1]==t[j-1])
+            {
+                curr[j]=prev[j-1];
+            }
+            else
+            {
+                curr[j]=1+min(prev[j],min(curr[j-1],prev[j-1]));
+            }
+        }
+    }
+    return prev[m];
+}
 int main()
 {
     int n,m;
-    string str,ptr;
-    cin>>n>>m>>str>>ptr;
-    cout<<"Using Recursion : ";
-    int ans=recursion(n-1,m-1,str,ptr);
-    cout<<ans<<endl;
+    cin>>n>>m;
+    string s,t;
+    cin>>s>>t;
+    cout<<"Answer using recursion: "<<recursion(n-1,m-1,s,t)<<endl;
     vector<vector<int>>dp(n,vector<int>(m,-1));
-    ans=memo(n-1,m-1,str,ptr,dp);
-    cout<<"Using Memorization : ";
-    cout<<ans<<endl;
+    cout<<"Answer using Memorization: "<<memorization(n-1,m-1,s,t,dp)<<endl;
     vector<vector<int>>dp1(n+1,vector<int>(m+1,0));
-    ans=tabulation(n,m,str,ptr,dp1);
-    cout<<"Using Tabulation : ";
-    cout<<ans<<endl;
+    cout<<"Answer using Tabulation: "<<tabulation(n,m,s,t,dp1)<<endl;
+    cout<<"Answer using Space optimization: "<<space_optimization(n,m,s,t)<<endl;
 }

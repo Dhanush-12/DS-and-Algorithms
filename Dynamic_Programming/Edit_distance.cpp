@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #define inf 1000000007
 using namespace std;
+// Time complexity : O(3^n) and Space complexity : O(n+m)
 int recursion(int ind1,int ind2,string s,string t)
 {
     if(ind1<0)
@@ -17,6 +18,7 @@ int recursion(int ind1,int ind2,string s,string t)
     }
     return 1+min(recursion(ind1,ind2-1,s,t),min(recursion(ind1-1,ind2-1,s,t),recursion(ind1-1,ind2,s,t)));
 }
+// Time complexity : O(n*m) and Space complexity : O(n*m)
 int memorization(int ind1,int ind2,string s,string t,vector<vector<int>>&dp)
 {
     if(ind1<0) return ind2+1;
@@ -28,6 +30,7 @@ int memorization(int ind1,int ind2,string s,string t,vector<vector<int>>&dp)
 
     return dp[ind1][ind2]=1+min(memorization(ind1,ind2-1,s,t,dp),min(memorization(ind1-1,ind2,s,t,dp),memorization(ind1-1,ind2-1,s,t,dp)));
 }
+// Time complexity : O(n*m) and Space complexity : O(n*m)
 int tabulation(int n,int m,string s,string t,vector<vector<int>>&dp)
 {
     for(int i=0;i<=n;i++) dp[i][0]=i;
@@ -48,6 +51,7 @@ int tabulation(int n,int m,string s,string t,vector<vector<int>>&dp)
     }
     return dp[n][m];
 }
+// Time Complexity : O(n*m) and Space complexity : O(m)
 int space_optimization(int n,int m,string s,string t)
 {
     vector<int>prev(m+1,0),curr(m+1,0);

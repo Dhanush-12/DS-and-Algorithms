@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 #define inf 1000000007
 using namespace std;
+// You are given an array of the prices of the stock on n days. You can perform a buy and a sell operation so that
+// at the end of the array, you should get the maximum profit.
+// Time complexity: O(n) and Space Complexity: O(1) 
 int solve(int n,vector<int>&arr)
 {
     int mini=arr[0];

@@ -28,7 +28,7 @@ int memorization(int ind,int n,int transaction_no,vector<int>&arr,vector<vector<
     }
     return dp[ind][transaction_no]=max(arr[ind]+memorization(ind+1,n,transaction_no+1,arr,dp,k), memorization(ind+1,n,transaction_no,arr,dp,k));
 }
-// Time complexity: O(n*2*k) and Space complexity: O(n*2*k+n) where n is for the recursion stack space.
+// Time complexity: O(n*2*k) and Space complexity: O(n*2*k+n)
 int tabulation(int n,vector<int>arr,vector<vector<int>>&dp,int k)
 {
     for(int i=n-1;i>=0;i--)

@@ -2,7 +2,6 @@
 #define inf 1000000007
 using namespace std;
 //Given a chain of matrices A1,..., An denoted by an array of size n+1, find out the minimum number of operations to multiply these n matrices.
-// Time complexity: O(n^3)
 int recursion(int i,int j,vector<int>&arr)
 {
     if(i==j) return 0;
@@ -14,8 +13,6 @@ int recursion(int i,int j,vector<int>&arr)
     }
     return mini;
 }
-// Time complexity: O(n^3) using memorization
-// Space complexity: O(n^2) + O(n) for dp array
 int memorization(int i,int j,vector<int>&arr,vector<vector<int>>&dp)
 {
     if(i==j) return 0;
@@ -28,6 +25,26 @@ int memorization(int i,int j,vector<int>&arr,vector<vector<int>>&dp)
     }
     return dp[i][j]=mini;
 }
+int tabulation(int n,vector<int>&arr,vector<vector<int>>&dp)
+{
+    for(int i=n-1;i>=0;i--)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            int mini=1000000007;
+            for(int k=i;k<j;k++)
+            {
+                int steps=arr[i-1]*arr[k]*arr[j] + dp[i][k]+dp[k+1][j];
+                if(steps<mini)
+                {
+                    mini=steps;
+                }
+            }
+            dp[i][j]=mini;
+        }
+    }
+    return dp[1][n-1];
+}
 int main()
 {
     int n;
@@ -37,6 +54,8 @@ int main()
     cout<<"Answer using recursion: "<<recursion(1,n-1,arr)<<endl;
     vector<vector<int>>dp(n,vector<int>(n,-1));
     cout<<"Answer using memorization: "<<memorization(1,n-1,arr,dp)<<endl;
+    vector<vector<int>>dp1(n,vector<int>(n,0));
+    cout<<"Answer using tabulation: "<<tabulation(n,arr,dp1)<<endl;
 }
 /*
 5

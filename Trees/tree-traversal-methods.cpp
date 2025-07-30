@@ -41,7 +41,7 @@ Node* takeInput(vector<int>&arr)
     }
     return root;
 }
-void levelOrderTraversal(Node* root,vector<int>&ans)
+void print(Node* root)
 {
     if(root==NULL)
     {
@@ -52,7 +52,7 @@ void levelOrderTraversal(Node* root,vector<int>&ans)
     while(!q.empty())
     {
         Node* f=q.front();
-        ans.push_back(f->data);
+        cout<<f->data<<' ';
         q.pop();
         if(f->left!=NULL)
         {
@@ -86,6 +86,33 @@ void postorderTraversal(Node* root, vector<int>&ans)
     postorderTraversal(root->right, ans);
     ans.push_back(root->data);
 }
+void levelOrderTraversal(Node* root,vector<vector<int>>&ans)
+{
+    if(!root) return;
+    queue<Node*>q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int sz=(int)q.size();
+        vector<int>level;
+        for(int i=0;i<sz;i++)
+        {
+            Node* curr=q.front();
+            q.pop();
+            if(curr->left)
+            {
+                q.push(curr->left);
+            }
+            if(curr->right)
+            {
+                q.push(curr->right);
+            }
+            level.push_back(curr->data);
+        }
+        ans.push_back(level);
+    }
+    return;
+}
 int main()
 {
     int n;
@@ -118,11 +145,16 @@ int main()
     }
     cout<<endl;
     ans.clear();
-    levelOrderTraversal(root, ans);
-    cout<<"Levelorder Traversal: ";
-    for(int i=0;i<ans.size();i++)
+    vector<vector<int>>res;
+    levelOrderTraversal(root, res);
+    cout<<"Levelorder Traversal: "<<endl;
+    for(int i=0;i<res.size();i++)
     {
-        cout<<ans[i]<<" ";
+        for(int j=0;j<res[i].size();j++)
+        {
+            cout<<res[i][j]<<' ';
+        }
+        cout<<endl;
     }
     cout<<endl;
 }

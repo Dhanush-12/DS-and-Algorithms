@@ -65,12 +65,33 @@ void print(Node* root)
     }
     return;
 }
-void inorderTraversal(Node* root, vector<int>&ans)
+void inorderTraversalRecursive(Node* root, vector<int>&ans)
 {
     if(!root) return;
-    inorderTraversal(root->left,ans);
+    inorderTraversalRecursive(root->left,ans);
     ans.push_back(root->data);
-    inorderTraversal(root->right, ans);
+    inorderTraversalRecursive(root->right, ans);
+}
+void inorderTraversalIterative(Node* root, vector<int>&ans)
+{
+    if(!root) return;
+    stack<Node*>st;
+    Node* node=root;
+    while(1)
+    {
+        if(node){
+            st.push(node);
+            node=node->left;
+        }
+        else {
+            if(st.empty()) break;
+            node=st.top();
+            st.pop();
+            ans.push_back(node->data);
+            node=node->right;
+        }
+    }
+    return;
 }
 void preorderTraversalRecursive(Node* root, vector<int>&ans)
 {
@@ -142,11 +163,19 @@ int main()
     for(int i=0;i<n;i++) cin>>arr[i];
     Node* root=takeInput(arr);
     vector<int>ans;
-    inorderTraversal(root, ans);
-    cout<<"Inorder Traversal: ";
+    inorderTraversalRecursive(root, ans);
+    cout<<"Inorder Traversal Recursive: ";
     for(int i=0;i<ans.size();i++)
     {
         cout<<ans[i]<<' ';
+    }
+    cout<<endl;
+    ans.clear();
+    inorderTraversalIterative(root, ans);
+    cout<<"Inorder Traversal iterative: ";
+    for(int i=0;i<ans.size();i++)
+    {
+        cout<<ans[i]<<" ";
     }
     cout<<endl;
     ans.clear();

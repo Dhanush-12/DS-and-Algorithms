@@ -40,6 +40,28 @@ void optimal_pascalsTriangleRow(int n)
     }
     cout<<endl;
 }
+// Time complexity : O(n*n);
+// Space Complexity : O(n);
+void PascalsTriangle(int n, vector<vector<int>>&arr)
+{
+    auto generateRow = [&](int row){
+        ll ans=1;
+        vector<int>ansRow;
+        ansRow.push_back(1);
+        for(int i=1;i<row;i++)
+        {
+            ans*=(row-i);
+            ans/=(i);
+            ansRow.push_back(ans);
+        }
+        return ansRow;
+    };
+    for(int i=1;i<=n;i++)
+    {
+        vector<int> row=generateRow(i);
+        arr.push_back(row);
+    }
+}
 int main()
 {
     int n,r;
@@ -48,6 +70,17 @@ int main()
     cout<<"Pascals row using bruteforce approach: "<<endl;
     bruteforce_pascalsTriangleRow(n);
     optimal_pascalsTriangleRow(n);
+    vector<vector<int>> PTriangle;
+    PascalsTriangle(n, PTriangle);
+    cout<<"The total pascal Triangle is: "<<endl;
+    for(int i=0;i<PTriangle.size();i++)
+    {
+        for(int j=0;j<PTriangle[i].size();j++)
+        {
+            cout<<PTriangle[i][j]<<" ";
+        }
+        cout<<endl;
+    }
 }
 /*
 

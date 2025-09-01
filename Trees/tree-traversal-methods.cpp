@@ -121,12 +121,72 @@ void preorderTraversalIterative(Node* root, vector<int>&ans)
     }
     return;
 }
-void postorderTraversal(Node* root, vector<int>&ans)
+void postorderTraversalRecursive(Node* root, vector<int>&ans)
 {
     if(!root) return;
-    postorderTraversal(root->left,ans);
-    postorderTraversal(root->right, ans);
+    postorderTraversalRecursive(root->left,ans);
+    postorderTraversalRecursive(root->right, ans);
     ans.push_back(root->data);
+}
+void postorderTraversalIterative_twoStacks(Node* root, vector<int>&ans)
+{
+    if(!root) return;
+    stack<Node*>st1,st2;
+    st1.push(root);
+    while(!st1.empty())
+    {
+        root=st1.top();
+        st1.pop();
+        st2.push(root);
+        if(root->left)
+        {
+            st1.push(root->left);
+        }
+        if(root->right)
+        {
+            st1.push(root->right);
+        }
+    }
+    while(!st2.empty())
+    {
+        ans.push_back(st2.top()->data);
+        st2.pop();
+    }
+    return;
+}
+void postorderTraversalIterative_oneStacks(Node* root, vector<int>&ans)
+{
+    if(!root) return;
+    stack<Node*>st;
+    Node* curr=root;
+    while(curr || !st.empty())
+    {
+        if(curr)
+        {
+            st.push(curr);
+            curr=curr->left;
+        }
+        else
+        {
+            Node* temp=st.top()->right;
+            if(temp == NULL)
+            {
+                temp=st.top();
+                st.pop();
+                ans.push_back(temp->data);
+                while(!st.empty() && temp == st.top()->right)
+                {
+                    temp = st.top();
+                    st.pop();
+                    ans.push_back(temp->data);
+                }
+            }
+            else
+            {
+                curr=temp;
+            }
+        }
+    }
 }
 void levelOrderTraversal(Node* root,vector<vector<int>>&ans)
 {
@@ -195,14 +255,29 @@ int main()
     }
     cout<<endl;
     ans.clear();
-    postorderTraversal(root, ans);
-    cout<<"Postorder Traversal: ";
+    postorderTraversalRecursive(root, ans);
+    cout<<"Postorder Traversal Recursive: ";
     for(int i=0;i<ans.size();i++)
     {
         cout<<ans[i]<<" ";
     }
     cout<<endl;
     ans.clear();
+    postorderTraversalIterative_twoStacks(root, ans);
+    cout<<"Postorder Traversal Iterative with two stacks: ";
+    for(int i=0;i<ans.size();i++)
+    {
+        cout<<ans[i]<<" ";
+    }
+    cout<<endl;
+    ans.clear();
+    postorderTraversalIterative_oneStacks(root, ans);
+    cout<<"Postorder Traversal Iterative with one stacks: ";
+    for(int i=0;i<ans.size();i++)
+    {
+        cout<<ans[i]<<" ";
+    }
+    cout<<endl;
     vector<vector<int>>res;
     levelOrderTraversal(root, res);
     cout<<"Levelorder Traversal: "<<endl;

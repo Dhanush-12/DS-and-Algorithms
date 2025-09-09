@@ -188,6 +188,43 @@ void postorderTraversalIterative_oneStacks(Node* root, vector<int>&ans)
         }
     }
 }
+void preInorderPostorderTogether(Node* root, vector<int>&pre,vector<int>&in,vector<int>&post)
+{
+    stack<pair<Node*, int>>st;
+    st.push({root, 1});
+    if(root == NULL) return;
+    while(!st.empty())
+    {
+        auto it = st.top();
+        st.pop();
+        if(it.second == 1)
+        {
+            pre.push_back(it.first->data);
+            it.second++;
+            st.push(it);
+
+            if(it.first->left != NULL)
+            {
+                st.push({it.first->left, 1});
+            }
+        }
+        else if(it.second == 2)
+        {
+            in.push_back(it.first->data);
+            it.second++;
+            st.push(it);
+
+            if(it.first->right != NULL)
+            {
+                st.push({it.first->right, 1});
+            }
+        }
+        else
+        {
+            post.push_back(it.first->data);
+        }
+    }
+}
 void levelOrderTraversal(Node* root,vector<vector<int>>&ans)
 {
     if(!root) return;
@@ -288,6 +325,27 @@ int main()
             cout<<res[i][j]<<' ';
         }
         cout<<endl;
+    }
+    cout<<endl;
+    vector<int>pre,in,post;
+    preInorderPostorderTogether(root, pre, in, post);
+    cout<<"All the technique using One Traversal: "<<endl;
+    cout<<"Preorder Traversal: "<<endl;
+    for(int i=0;i<pre.size();i++)
+    {
+        cout<<pre[i]<<' ';
+    }
+    cout<<endl;
+    cout<<"Inorder Traversal: "<<endl;
+    for(int i=0;i<in.size();i++)
+    {
+        cout<<in[i]<<' ';
+    }
+    cout<<endl;
+    cout<<"Postorder Traversal: "<<endl;
+    for(int i=0;i<post.size();i++)
+    {
+        cout<<post[i]<<' ';
     }
     cout<<endl;
 }

@@ -29,6 +29,35 @@ void nextGreaterPermuationOptmial(int n,vector<int>&arr)
     }
     reverse(arr.begin()+ind+1,arr.end());
 }
+// Another accepted method for calculating next greater permutation problem.
+void nextGreaterPermutationOptimal1(int n, vector<int>&arr)
+{
+    stack<pair<int,int>>s;
+    s.push({arr[n-1],n-1});
+    for(int i=n-2;i>=0;i--)
+    {
+        if(arr[i]>=s.top().first)
+        {
+            s.push({arr[i],i});
+        }
+        else
+        {
+            int rightele=s.top().first;
+            int ind=s.top().second;
+            while(!s.empty() && s.top().first>arr[i])
+            {
+                rightele=s.top().first;
+                ind=s.top().second;
+                s.pop();
+            }
+            swap(arr[i],arr[ind]);
+            sort(arr.begin()+i+1,arr.end());
+            return;
+        }
+    }
+    sort(arr.begin(),arr.end());
+    return;
+}
 int main()
 {
     int n;

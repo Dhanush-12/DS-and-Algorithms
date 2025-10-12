@@ -36,6 +36,7 @@ pair<int,int> missingAndRepeatingOptimal2(int n,vector<int>&arr)
         }
         bitno++;
     }
+    // This number which is equal to (1<<bitno) also can be written as number = xr & ~(xr-1);
     int zero=0,one=0;
     for(int i=0;i<n;i++)
     {

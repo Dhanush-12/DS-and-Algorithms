@@ -22,6 +22,31 @@ vector<pair<int,int>> optimal(int n,vector<pair<int,int>>&arr)
     ans.push_back({low,high});
     return ans;
 }
+vector<vector<int>> merge(vector<vector<int>>& intervals) 
+{
+    sort(intervals.begin(),intervals.end());
+    int low=intervals[0][0];
+    int high=intervals[0][1];
+    int i=1;
+    while(i<intervals.size())
+    {
+        int currlow=intervals[i][0];
+        int currhigh=intervals[i][1];
+        if(currlow <= high)
+        {
+            high=max(high,currhigh);
+            intervals[i-1][1]=high;
+            intervals.erase(intervals.begin() + i);
+        }
+        else
+        {
+            low=currlow;
+            high=currhigh;
+            i++;
+        }
+    }
+    return intervals;
+}
 int main()
 {
     int n;

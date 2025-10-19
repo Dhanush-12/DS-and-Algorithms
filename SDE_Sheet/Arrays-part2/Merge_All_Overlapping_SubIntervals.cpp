@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Time Complexity : O(nlog(n))
+// Space Complexity : O(n)
 vector<pair<int,int>> optimal(int n,vector<pair<int,int>>&arr)
 {
     vector<pair<int,int>>ans;
@@ -22,6 +24,8 @@ vector<pair<int,int>> optimal(int n,vector<pair<int,int>>&arr)
     ans.push_back({low,high});
     return ans;
 }
+// Time Complexity : O(nlog(n))
+// Space Complexity : O(1)
 vector<vector<int>> merge(vector<vector<int>>& intervals) 
 {
     sort(intervals.begin(),intervals.end());

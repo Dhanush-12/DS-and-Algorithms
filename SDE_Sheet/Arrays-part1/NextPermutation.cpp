@@ -30,6 +30,8 @@ void nextGreaterPermuationOptmial(int n,vector<int>&arr)
     reverse(arr.begin()+ind+1,arr.end());
 }
 // Another accepted method for calculating next greater permutation problem.
+// Time complexity : O(nlog(n))
+// Time complexity : O(n)
 void nextGreaterPermutationOptimal1(int n, vector<int>&arr)
 {
     stack<pair<int,int>>s;
@@ -53,6 +55,33 @@ void nextGreaterPermutationOptimal1(int n, vector<int>&arr)
             swap(arr[i],arr[ind]);
             sort(arr.begin()+i+1,arr.end());
             return;
+        }
+    }
+    sort(arr.begin(),arr.end());
+    return;
+}
+// Another method for calculating the next greater permutation
+// Time complexity : O(nlog(n))
+// Time complexity : O(n)
+void nextGreaterPermutationOptimal2(int n, vector<int>&arr)
+{
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    pq.push({arr[n-1],n-1});
+    for(int i=n-2;i>=0;i--)
+    {
+        if(arr[i]<arr[i+1])
+        {
+            while(!pq.empty() && pq.top().first<=arr[i]) pq.pop();
+            if(!pq.empty())
+            {
+                swap(arr[i],arr[pq.top().second]);
+                sort(arr.begin()+i+1,arr.end());
+                return;
+            }
+        }
+        else
+        {
+            pq.push({arr[i],i});
         }
     }
     sort(arr.begin(),arr.end());

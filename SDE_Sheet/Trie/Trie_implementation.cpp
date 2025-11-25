@@ -1,23 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 struct Node {
-    Node *links[26];
+    Node* links[26];
     bool flag=false;
 
     bool containsKey(char ch) {
-         return (links[ch-'a'] != NULL);
+        return (links[ch-'a']!=NULL);
     }
 
-    void put(char ch, Node* node)
-    {
+    void put(char ch, Node* node) {
         links[ch-'a']=node;
     }
 
-    Node *get(char ch) {
+    Node* get(char ch) {
         return links[ch-'a'];
     }
 
-    bool setEnd() {
+    void setEnd() {
         flag=true;
     }
 
@@ -26,38 +25,38 @@ struct Node {
     }
 };
 class Trie {
-    Node *root;
-public:
+    Node* root;
+    public:
     Trie() {
         root = new Node();
     }
-    void insert(string word) {
-        Node *node = root;
-        for(int i=0;i<word.size();i++)
-        {
-            if(!node->containsKey(word[i]))
-            {
-                node->put(word[i], new Node());
+
+    void insertWord(string str) {
+        Node* node = root;
+        for(int i=0;i<str.size();i++) {
+            if(!node->containsKey(str[i])) {
+                node->put(str[i], new Node());
             }
-            node->get(word[i]);
+            node=node->get(str[i]);
         }
         node->setEnd();
     }
-    bool search(string word) {
-        Node *node = root;
-        for(int i=0;i<word.size();i++)
+
+    bool checkWord(string str) {
+        Node* node = root;
+        for(int i=0;i<str.size();i++)
         {
-            if(!node->containsKey(word[i])) return false;
-            node->get(word[i]);
+            if(!node->containsKey(str[i])) return false;
+            node=node->get(str[i]);
         }
         return node->getEnd();
     }
-    bool startsWith(string word) {
+    bool checkForPrefix(string str) {
         Node* node = root;
-        for(int i=0;i<word.size();i++)
+        for(int i=0;i<str.size();i++)
         {
-            if(!node->containsKey(word[i])) return false;
-            node->get(word[i]);
+            if(!node->containsKey(str[i])) return false;
+            node=node->get(str[i]);
         }
         return true;
     }
@@ -65,26 +64,33 @@ public:
 int main()
 {
     Trie t;
-    int controller=1;
+    cout<<".................Staring the application................."<<endl;
+    int controller=10;
     string str;
-    cout<<"Enter a word into your trie: ";
-    do {
-        if(controller == 1)
-        {
-            cin>>str;
-            t.insert(str);
-        }
-        else if(controller == 2)
-        {
-            cin>>str;
-            cout<<t.search(str)<<endl;
-        }
-        else if(controller == 3)
-        {
-            cin>>str;
-            cout<<t.startsWith(str)<<endl;
-        }
-        cout<<"Enter the controller value: ";
+    while(controller != 0) {
+        cout<<"Enter appropriate option to move forward or 0 to exit: "<<endl;
+        cout<<"1. Insert a word into the Trie"<<endl;;
+        cout<<"2. Find the word in the Trie"<<endl;
+        cout<<"3. Check is the word is prefix of any word in the Trie"<<endl;
         cin>>controller;
-    }while(controller != 0);
+        if(controller == 0) break;
+        cin>>str;
+        if(controller == 1) {
+            t.insertWord(str);
+        }
+        else if(controller == 2) {
+            if(t.checkWord(str)) {
+                cout<<"Word is present in the Trie"<<endl;
+            } else {
+                cout<<"Oops!!, Can't find the word right now!"<<endl;
+            }
+        }
+        else if(controller == 3) {
+            if(t.checkForPrefix(str)) {
+                cout<<"The given word is a prefix of a word in the Trie"<<endl;
+            } else {
+                cout<<"Cannot find a word for which the given word is a prefix!"<<endl;
+            }
+        }
+    }
 }

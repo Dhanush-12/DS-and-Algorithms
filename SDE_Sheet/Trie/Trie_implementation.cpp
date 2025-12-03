@@ -134,10 +134,7 @@ public:
                 node = node->get(str[i]);
             }
             node->decreasePrefCount();
-            if(node->getEnd() && node->getWordCount() > 1)
-            {
-                node->decreaseWordCount();
-            }
+            node->decreaseWordCount();
         }
     }
 };

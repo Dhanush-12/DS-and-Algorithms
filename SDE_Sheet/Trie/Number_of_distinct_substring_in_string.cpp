@@ -3,6 +3,10 @@ using namespace std;
 struct Node {
     Node* links[26];
     bool flag = false;
+    ~Node() {
+        for (int i=0; i<26; ++i) {
+            delete links[i];
+    }}
 
     bool containsKey(char ch)
     {
@@ -28,67 +32,25 @@ struct Node {
         return flag;
     }
 };
-class Trie {
-    Node* root;
-public:
-    Trie() {
-        root = new Node();
-    }
-
-    bool insertWord(string &str)
-    {
-        Node* node = root;
-        int f = 0;
-        for(int i=0;i<str.size();i++)
-        {
-            if(!node->containsKey(str[i]))
-            {
-                f=1;
-                node->put(str[i], new Node());
-            }
-            node = node->get(str[i]);
-        }
-        node->setEnd();
-        return f;
-    }
-    bool searchWord(string &str)
-    {
-        Node* node = root;
-        for(int i=0;i<str.size();i++)
-        {
-            if(!node->containsKey(str[i])) return false;
-            node = node->get(str[i]);
-        }
-        return node->getEnd();
-    }
-    bool isPrefix(string &str)
-    {
-        Node* node = root;
-        for(int i=0;i<str.size();i++)
-        {
-            if(!node->containsKey(str[i])) return false;
-            node = node->get(str[i]);
-        }
-        return true;
-    }
-};
 int countDistinctSubstrings(string &str)
 {
-    Trie t;
-    int n=(int)str.size();
+    int n = (int)str.size();
+    Node* root = new Node();
     int ans=0;
     for(int i=0;i<n;i++)
     {
-        string temp="";
+        Node* node = root;
         for(int j=i;j<n;j++)
         {
-            temp+=str[j];
-            if(t.insertWord(temp))
+            if(!node->containsKey(str[j]))
             {
                 ans++;
+                node->put(str[j], new Node());
             }
+            node = node->get(str[j]);
         }
     }
+    delete root;
     return ans;
 }
 int main()

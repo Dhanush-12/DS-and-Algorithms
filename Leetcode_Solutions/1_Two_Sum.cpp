@@ -2,6 +2,8 @@
 using namespace std;
 class Solution {
 public:
+    // Time Complexity: O(n*log(n) + n)
+    // Space Complexity: O(n)
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<pair<int,int>>arr;
         for(int i=0;i<nums.size();i++)
@@ -23,6 +25,8 @@ public:
         return {-1,-1};
     }
     // Overriding the above original function
+    // Time Complexity: O(n)
+    // Space Complexity: O(n)
     vector<int> twoSum(int n, vector<int>& nums, int target) {
         unordered_map<int,int>mp;
         for(int i=0;i<nums.size();i++)

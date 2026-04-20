@@ -20,23 +20,26 @@ string longestCommonSubsequence(string &str1, string &str2)
             }
         }
     }
-    int i=n,j=m;
-    int curr = dp[n][m];
-    while(i>0 && j>0)
-    {
-        if(dp[i-1][j] == curr || dp[i][j-1] == curr)
-        {
-            if(dp[i-1][j] == curr) i--;
-            else j--;
-        }
-        else
-        {
-            ans += str1[i-1];
-            curr -= 1;
-        }
-    }
-    reverse(ans.begin(), ans.end());
-    return ans;
+    string str;
+	int i=n,j=m;
+	while(i>0 && j>0)
+	{
+       if(str1[i-1]==str2[j-1])
+	   {
+		  str+=str1[i-1];
+		  i--,j--;
+	   }
+	   else if(dp[i-1][j]>dp[i][j-1])
+	   {
+		   i--;
+	   }
+	   else
+	   {
+		   j--;
+	   }
+	}
+	reverse(str.begin(),str.end());
+	return str;
 }
 int main()
 {

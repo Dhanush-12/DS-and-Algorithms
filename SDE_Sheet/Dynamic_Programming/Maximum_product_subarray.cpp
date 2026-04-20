@@ -3,6 +3,22 @@ using namespace std;
 // Given an array that contains both negative and positive integers, find the maximum product subarray.
 // Time Complexity: O(n);
 // Space Complexity: O(1);
+int maximumProductSubarray(int n, vector<int>&arr)
+{
+    int ans = INT_MIN;
+    int pref = 1, suff = 1;
+    for(int i=0;i<n;i++)
+    {
+        if(pref == 0) pref = 1;
+        if(suff == 0) suff = 1;
+
+        pref *= arr[i];
+        suff *= arr[i];
+
+        ans = max(ans, max(pref, suff));
+    }
+    return ans;
+}
 int maxProductSubarray(int n, vector<int>&arr)
 {
     int maxi = arr[0];

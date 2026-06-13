@@ -28,6 +28,43 @@ public:
         }
         return 0;
     }
+    // Overloaded method
+    // Easy approach: Do Binary search on the number of smallest array elements to include in left half of the final array
+    // Time Complexity : O(log(min(n, m)))
+    double findMedianSortedArrays(int n, int m, vector<int>& a, vector<int>& b) {
+        if (n > m) return findMedianSortedArrays(m, n, b, a);
+
+        int totalLeft = (n + m + 1) / 2;
+
+        int low = 0, high = n;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int fromB = totalLeft - mid;
+
+            int lefta = (mid > 0) ? a[mid - 1] : INT_MIN;
+            int righta = (mid < n) ? a[mid] : INT_MAX;
+
+            int leftb = (fromB > 0) ? b[fromB - 1] : INT_MIN;
+            int rightb = (fromB < m) ? b[fromB] : INT_MAX;
+
+            if (lefta <= rightb && leftb <= righta) {
+                if ((n + m) % 2 == 1) {
+                    return max(lefta, leftb);
+                } else {
+                    return (max(lefta, leftb) + min(righta, rightb)) / 2.0;
+                }
+            }
+            else if (lefta > rightb) {
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
+
+        return 0.0;
+    }
 };
 int main()
 {

@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+// Problem statement: Given an array of n integers, find the length of longest increasing subsequence
+// in the given array.
+
 class Solution {
 public:
     // Time complexity: O(n^2)

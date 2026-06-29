@@ -2,6 +2,17 @@
 #define ll long long
 #define sp(x, y) fixed << setprecision(x) << y
 using namespace std;
+
+/*
+    Given two arrays a[] and b[] of positive integers of size n and m respectively, where m ≤ n.  You are allowed to insert zeros anywhere into the second array b so that its length becomes equal to n.
+
+    The dot product of two arrays of equal length n is defined as: a[0]*b[0] + a[1]*b[1] + ... + a[n-1]*b[n-1].
+    Return the maximum possible dot product of the two arrays.
+
+    Input: a[] = [2, 3, 1, 7, 8], b[] = [3, 6, 7]
+    Output: 107
+*/
+
 class Solution {
     // Time Complexity : O(2^n)
     // Space Complexity: O(2^n);

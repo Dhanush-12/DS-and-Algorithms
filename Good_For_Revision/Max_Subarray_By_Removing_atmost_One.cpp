@@ -12,6 +12,23 @@ using namespace std;
     Input: arr[] = [1, 2, 3, -4, 5]
     Output: 11
 
+    Solution: Use Kadane with two states:
+
+    noDel  = max subarray sum ending here with no deletion
+    oneDel = max subarray sum ending here with one deletion already used
+
+    For each arr[i]:
+
+    oneDel = max(oneDel + arr[i], noDel); 
+
+    Meaning:
+
+    oneDel + arr[i] → already deleted before, take current
+    noDel → delete current element
+    noDel = max(noDel + arr[i], arr[i]);
+
+    Normal Kadane.
+
 */
 
 class Solution {

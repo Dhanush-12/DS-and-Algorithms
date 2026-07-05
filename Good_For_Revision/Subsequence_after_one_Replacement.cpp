@@ -64,7 +64,7 @@ public:
 
             if(usedReplace < n && s[usedReplace] == ch)
             {
-                newUsedReplace = max(newUsedReplace, usedReplace+1);
+                newUsedReplace = usedReplace+1;
             }
 
             if(noReplace < n)

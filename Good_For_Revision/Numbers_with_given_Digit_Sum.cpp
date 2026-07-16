@@ -13,7 +13,28 @@ using namespace std;
 */
 
 class Solution {
+    int solve(int pos,int n, int sum)
+    {
+        if(pos > n)
+        {
+            return sum == 0 ? 1 : 0;
+        }
+
+        int ways = 0;
+
+        int startDigit = (pos == 1) ? 1 : 0;
+        for(int digit = startDigit; digit <= 9; digit++)
+        {
+            if(sum-digit >= 0) ways += solve(pos+1, n, sum-digit);
+        }
+        return ways;
+    }
   public:
+  // Recursive way of Solving
+    int countWaysRecursive(int n, int sum) {
+        return solve(1, n, sum);
+    }
+    // Tabulation method of solving
     int countWays(int n, int sum) {
         if(9*n < sum) return -1;
         vector<vector<int>> dp(n+1, vector<int>(sum+1, 0));

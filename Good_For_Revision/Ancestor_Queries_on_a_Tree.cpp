@@ -19,6 +19,8 @@ using namespace std;
 
 class Solution {
   public:
+    // Time Complexity: O(N*log2(10^5) + Q*log2(k))
+    // Space Complexity: O(N*log2(10^5))
     vector<int> kthAncestorQueries(vector<int>& arr, vector<vector<int>>& queries) {
         int n = (int)arr.size();
         int LOG = 20;

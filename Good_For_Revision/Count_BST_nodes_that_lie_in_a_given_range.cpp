@@ -1,5 +1,18 @@
 #include<bits/stdc++.h>
 using namespace std;
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    // Constructor to initialize a new node
+    Node(int val) {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
 class Solution {
     void getSortedValues(Node* root, vector<int> &arr)
     {

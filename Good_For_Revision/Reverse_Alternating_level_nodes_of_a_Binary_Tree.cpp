@@ -102,7 +102,6 @@ class Solution {
         {
            int sz = (int)q.size();
            vector<Node*> nodes;
-           vector<int> values;
            for(int i=0;i<sz;i++)
            {
               Node* curr = q.front();
@@ -114,7 +113,6 @@ class Solution {
                  if(level%2 == 0)
                  {
                     nodes.push_back(curr->left);
-                    values.push_back(curr->left->data);
                  }
               }
               if(curr->right)
@@ -123,17 +121,17 @@ class Solution {
                  if(level%2 == 0)
                  {
                     nodes.push_back(curr->right);
-                    values.push_back(curr->right->data);
                  }
               }
            }
            if(nodes.size() > 0)
            {
-              reverse(values.begin(), values.end());
-              for(int i=0;i<nodes.size();i++)
+              int i = 0, j = nodes.size()-1;
+              while(i < j)
               {
-                 Node* curr = nodes[i];
-                 curr->data = values[i];
+                 swap(nodes[i]->data, nodes[j]->data);
+                 i++;
+                 j--;
               }
            }
            level++;

@@ -2,10 +2,12 @@
 #define ll long long
 using namespace std;
 /*
-    Given a grid of size n*m (n is the number of rows and m is the number of columns in the grid) consisting of 'W's (Water) and 'L's (Land). Find the number of islands.
+    Given a grid of size n*m (n is the number of rows and m is the number of columns in the grid)
+    consisting of 'W's (Water) and 'L's (Land). Find the number of islands.
 
-    Note: An island is either surrounded by water or the boundary of a grid and is formed by connecting adjacent lands horizontally or vertically or diagonally i.e., in all 8 directions.
-
+    Note: An island is either surrounded by water or the boundary of a grid and is formed by
+    connecting adjacent lands horizontally or vertically or diagonally i.e., in all 8 directions.
+    
     Input: grid[][] = 
                 [['L', 'L', 'W', 'W', 'W'], 
                 ['W', 'L', 'W', 'W', 'L'], 

@@ -91,8 +91,8 @@ class Solution {
         return ans;
     }
     // Krushkal's Algorithm
-    // Time Complexity: O()
-    // Space Complexity: O()
+    // Time Complexity: O(m*log(m) + m*4*alpha) where is the m is number of edges
+    // Space Complexity: O(V)
     int spanningTree(vector<vector<int>> &edges, int V) {
         DSU dsu(V);
 

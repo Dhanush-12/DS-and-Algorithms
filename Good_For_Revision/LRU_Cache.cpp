@@ -26,6 +26,7 @@ using namespace std;
     ["PUT", 6, 7], ["GET", 4], ["PUT", 1, 2], ["GET", 3]]
     Output: [5, -1]
 */
+// Time Complexity of get and put: O(log(cap))
 class LRUCache {
     map<int, pair<int,int>> byId;
     unordered_map<int, pair<int,int>> byKey;
@@ -72,6 +73,53 @@ class LRUCache {
         byId.erase(id);
         byId[currId] = {key, value};
         byKey[key] = {value, currId};
+    }
+};
+// Time Complexity of get and put: O(1)
+class LRUCache {
+    int capacity;
+    list<pair<int, int>> cache;
+    unordered_map<int, list<pair<int, int>>::iterator> mp;
+
+public:
+    LRUCache(int cap) {
+        capacity = cap;
+    }
+
+    int get(int key) {
+        if (mp.find(key) == mp.end())
+            return -1;
+
+        auto it = mp[key];
+        int value = it->second;
+
+        // Move this entry to the most recently used position
+        cache.splice(cache.begin(), cache, it);
+
+        return value;
+    }
+
+    void put(int key, int value) {
+        // Key already exists
+        if (mp.find(key) != mp.end()) {
+            auto it = mp[key];
+            it->second = value;
+
+            // Mark it as most recently used
+            cache.splice(cache.begin(), cache, it);
+            return;
+        }
+
+        // Evict the least recently used entry if full
+        if (cache.size() == capacity) {
+            int lruKey = cache.back().first;
+            mp.erase(lruKey);
+            cache.pop_back();
+        }
+
+        // Insert new entry at the most recently used position
+        cache.push_front({key, value});
+        mp[key] = cache.begin();
     }
 };
 int main() 

@@ -1,17 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
 /*
-    Problem: Given the root of a AVL Tree and an integer key, insert the key into the given AVL Tree such that the tree remains a valid AVL Tree after the insertion. The task is to return the root of the updated AVL Tree after inserting the given key. 
+    Problem: Given the root of a AVL Tree and an integer key, insert the key into the given
+    AVL Tree such that the tree remains a valid AVL Tree after the insertion. The task is to
+    return the root of the updated AVL Tree after inserting the given key. 
 
     Note:
-
-
     The given tree is initially a valid AVL Tree.
     The key does not already exist in the tree.
 */
 
 // Structure of AVL Tree Node
-
 class Node {
 public:
     int key;

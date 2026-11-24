@@ -55,7 +55,7 @@ public:
             int sum = l2->data + carry;
             int digit = sum % 10;
             carry = sum / 10;
-            head->next = new ListNode(digit);;
+            head->next = new ListNode(digit);
             head = head->next;
             l2 = l2->next;
         }
